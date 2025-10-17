@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository code
+      # 1️⃣ Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest coverage
 
-      # 4️⃣ Run tests and generate coverage report
+      # 4️⃣ Run tests and generate coverage
       - name: Run tests and generate coverage
         run: |
           coverage run -m pytest
@@ -37,10 +37,7 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-          projectKey: sonar-python-sample
-          organization: atik-foysal
           projectBaseDir: .
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_SCANNER_OPTS: "-Dsonar.python.coverage.reportPaths=coverage.xml"
