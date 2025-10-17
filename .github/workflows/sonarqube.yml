@@ -38,16 +38,9 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           projectKey: sonar-python-sample
+          organization: atik-foysal
           projectBaseDir: .
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        # Pass coverage.xml to SonarCloud
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=sonar-python-sample \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-
+          SONAR_SCANNER_OPTS: "-Dsonar.python.coverage.reportPaths=coverage.xml"
